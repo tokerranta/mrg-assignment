@@ -1,8 +1,8 @@
 const expect = require('expect');
 const { spy } = require('sinon');
-const GamesController = require('../GamesController');
-const GameListItem = require('../GameListItem');
-const RequestGamesResult = require('../RequestGamesResult');
+const GamesController = require('./GamesController');
+const GameListItem = require('../application/GameListItem');
+const RequestGamesResult = require('../application/RequestGamesResult');
 
 describe('GamesController', () => {
   describe('When GameService returns an error result', () => {

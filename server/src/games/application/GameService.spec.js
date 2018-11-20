@@ -1,6 +1,6 @@
 const expect = require('expect');
 const { spy } = require('sinon');
-const GameService = require('../GameService');
+const GameService = require('./GameService');
 
 const mockedGame = {
   id: '1_can_2_can_ogs',

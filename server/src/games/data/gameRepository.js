@@ -15,7 +15,7 @@ const filterByGameCollectionId = gameCollectionId => {
 const filterByGameProvider = gameProvider =>
   allGames.filter(game => game.gameProvider === gameProvider);
 
-module.exports = {
+module.exports =  {
   getAllGames,
   filterByGameCollectionId,
   filterByGameProvider,

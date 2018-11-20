@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "test": "mocha ./src/**/specs/**"
+    "test": "mocha ./src/**/*.spec.js"
   },
   "keywords": [],
   "author": "",

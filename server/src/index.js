@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-const gameRoutes = require('./games/gameRoutes');
+const { port } = require('./config');
+const gameRoutes = require('./games/api/gameRoutes');
 
 app.use('/api/games', gameRoutes);
 
