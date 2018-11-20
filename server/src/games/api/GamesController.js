@@ -9,13 +9,10 @@ class GamesController {
   getGames(req, res) {
     const result = this.gameService.requestGames(req);
     if (result.hasError) {
-      res
-        .status(500)
-        .json({ error: result.errorMessage })
-        .end();
+      res.status(500).json({ error: result.errorMessage });
     }
     if (result.isEmpty) {
-      res.status(404).end();
+      res.status(404);
     }
 
     res.json(result.games);

@@ -1,22 +1,51 @@
 const R = require('ramda');
-const allGames = require('./all-games.json');
 
-const getAllGames = () => {
-  return allGames;
-};
+class GameRepository {
+  constructor(dataSource) {
+    this.dataSource = dataSource;
+  }
 
-const filterByGameCollectionId = gameCollectionId => {
-  const containsGameCollectionId = game =>
-    !R.isNil(game.gameCollectionIds) && R.contains(gameCollectionId, game.gameCollectionIds);
+  getAllGames() {
+    return this.dataSource.allGames;
+  }
 
-  return allGames.filter(containsGameCollectionId);
-};
+  filterByGameProvider(gameProvider) {
+    return this.dataSource.allGames.filter(
+      game => game.gameProvider.toUpperCase() === gameProvider.toUpperCase()
+    );
+  }
 
-const filterByGameProvider = gameProvider =>
-  allGames.filter(game => game.gameProvider === gameProvider);
+  filterByGameCollectionId(gameCollectionId) {
+    const containsGameCollectionId = game =>
+      !R.isNil(game.gameCollectionIds) &&
+      R.contains(
+        gameCollectionId.toUpperCase(),
+        game.gameCollectionIds.map(id => id.toUpperCase())
+      );
 
-module.exports =  {
-  getAllGames,
-  filterByGameCollectionId,
-  filterByGameProvider,
-};
+    return this.dataSource.allGames.filter(containsGameCollectionId);
+  }
+}
+
+module.exports = GameRepository;
+
+// const getAllGames = () => {
+//   return allGames;
+// };
+
+// const filterByGameCollectionId = gameCollectionId => {
+//   const containsGameCollectionId = game =>
+//     !R.isNil(game.gameCollectionIds) &&
+//     R.contains(gameCollectionId.toUpperCase(), game.gameCollectionIds.map(id => id.toUpperCase()));
+
+//   return allGames.filter(containsGameCollectionId);
+// };
+
+// const filterByGameProvider = gameProvider =>
+//   allGames.filter(game => game.gameProvider.toUpperCase() === gameProvider.toUpperCase());
+
+// module.exports = {
+//   getAllGames,
+//   filterByGameCollectionId,
+//   filterByGameProvider,
+// };

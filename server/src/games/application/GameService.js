@@ -1,6 +1,6 @@
-const R = require("ramda");
-const GameListItem = require("./GameListItem");
-const RequestGamesResult = require("./RequestGamesResult");
+const R = require('ramda');
+const GameListItem = require('./GameListItem');
+const RequestGamesResult = require('./RequestGamesResult');
 
 class GameService {
   constructor(gameRepository) {
@@ -22,7 +22,7 @@ class GameService {
   _getGamesByCollectionIdAndProvider(gameCollectionId, gameProvider) {
     return this.gameRepository
       .filterByGameCollectionId(gameCollectionId)
-      .filter(game => game.gameProvider === gameProvider)
+      .filter(game => game.gameProvider.toUpperCase() === gameProvider.toUpperCase())
       .map(this._mapToGameListItem);
   }
 
@@ -33,15 +33,12 @@ class GameService {
   }
 
   _getGamesByProvider(gameProvider) {
-    return this.gameRepository
-      .filterByGameProvider(gameProvider)
-      .map(this._mapToGameListItem);
+    return this.gameRepository.filterByGameProvider(gameProvider).map(this._mapToGameListItem);
   }
   requestGames({ query = {} }) {
     const { gameCollectionId, gameProvider } = query;
     try {
-      const queryByCollectionIdAndProvider =
-        !R.isNil(gameCollectionId) && !R.isNil(gameProvider);
+      const queryByCollectionIdAndProvider = !R.isNil(gameCollectionId) && !R.isNil(gameProvider);
       const queryByGameProvider = !R.isNil(gameProvider);
       const queryByCollectionId = !R.isNil(gameCollectionId);
 
@@ -54,9 +51,7 @@ class GameService {
       }
 
       if (queryByCollectionId) {
-        const gamesByCollectionId = this._getGamesByCollectionId(
-          gameCollectionId
-        );
+        const gamesByCollectionId = this._getGamesByCollectionId(gameCollectionId);
         return RequestGamesResult.success(gamesByCollectionId);
       }
 
@@ -65,9 +60,7 @@ class GameService {
         return RequestGamesResult.success(gamesByProvider);
       }
 
-      const gamesByNoFilter = this.gameRepository
-        .getAllGames()
-        .map(this._mapToGameListItem);
+      const gamesByNoFilter = this.gameRepository.getAllGames().map(this._mapToGameListItem);
 
       return RequestGamesResult.success(gamesByNoFilter);
     } catch (error) {

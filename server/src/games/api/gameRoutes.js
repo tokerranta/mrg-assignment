@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const GameService = require('../application/GameService');
 const GamesController = require('./GamesController');
-const gameRepository = require('../data/gameRepository');
-const gamesController = new GamesController(new GameService(gameRepository));
+const gameRepositoryFactory = require('../data/gameRepositoryFactory');
+const gamesController = new GamesController(new GameService(gameRepositoryFactory.create()));
 
 router.get('/', gamesController.getGames);
 
