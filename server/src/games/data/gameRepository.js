@@ -1,4 +1,4 @@
-const R = require('ramda');
+const R = require("ramda");
 
 class GameRepository {
   constructor(dataSource) {
@@ -28,24 +28,3 @@ class GameRepository {
 }
 
 module.exports = GameRepository;
-
-// const getAllGames = () => {
-//   return allGames;
-// };
-
-// const filterByGameCollectionId = gameCollectionId => {
-//   const containsGameCollectionId = game =>
-//     !R.isNil(game.gameCollectionIds) &&
-//     R.contains(gameCollectionId.toUpperCase(), game.gameCollectionIds.map(id => id.toUpperCase()));
-
-//   return allGames.filter(containsGameCollectionId);
-// };
-
-// const filterByGameProvider = gameProvider =>
-//   allGames.filter(game => game.gameProvider.toUpperCase() === gameProvider.toUpperCase());
-
-// module.exports = {
-//   getAllGames,
-//   filterByGameCollectionId,
-//   filterByGameProvider,
-// };
