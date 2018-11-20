@@ -1,4 +1,4 @@
-const R = require("ramda");
+const R = require('ramda');
 
 class GamesController {
   constructor(gameService) {
