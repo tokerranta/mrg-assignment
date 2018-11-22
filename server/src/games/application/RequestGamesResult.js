@@ -1,9 +1,10 @@
-const R = require('ramda');
+const R = require("ramda");
 
 class RequestGamesResult {
-  constructor(games = [], error = {}) {
+  constructor(games = [], error = {}, isBadRequest = false) {
     this.games = games;
     this.error = error;
+    this._isBadRequest = isBadRequest;
   }
 
   static success(games) {
@@ -12,6 +13,10 @@ class RequestGamesResult {
 
   static error(error) {
     return new RequestGamesResult([], error);
+  }
+
+  static badRequest(error) {
+    return new RequestGamesResult([], error, true);
   }
 
   get hasError() {
@@ -24,6 +29,10 @@ class RequestGamesResult {
 
   get errorMessage() {
     return this.error.message;
+  }
+
+  get isBadRequest() {
+    return this._isBadRequest;
   }
 }
 
