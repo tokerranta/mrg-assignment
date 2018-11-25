@@ -1,4 +1,4 @@
-const R = require('ramda');
+const R = require("ramda");
 
 class GamesController {
   constructor(gameService) {
@@ -6,8 +6,13 @@ class GamesController {
     this.getGames = this.getGames.bind(this);
   }
 
-  getGames(req, res) {
-    const result = this.gameService.requestGames(req);
+  async getGames(req, res) {
+    const result = await this.gameService.requestGames(req);
+
+    if (result.isBadRequest) {
+      res.status(400).json(result.errorMessage);
+    }
+
     if (result.hasError) {
       res.status(500).json({ error: result.errorMessage });
     }
